@@ -35,8 +35,9 @@
 }
 
 #form-table{
-   
-    padding: 50px 20px;
+    
+    
+    padding: 50px;
     background-image: linear-gradient(to right top, #64461f, #704d1e, #7c531e, #895a1c, #96611b, #96621c, #95621d, #95631e, #875d22, #7a5725, #6d5127, #604b2a);
     border-width: 6px;
     border-style: solid;
@@ -55,7 +56,7 @@
 }
 .div-btn .btn{
 
-    width: 200px;
+    width: 100px;
     border-radius: 20px;
     background-color: #228B22;
     border: none;
