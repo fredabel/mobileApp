@@ -10,35 +10,48 @@
     
 </head>
 <body>
-        <div data-role="page">
+        <div data-role="page" id="content">
 
-            <div data-role="header" class="header" id="main" >
-                <h1>Tic Tac Toe</h1>
-            </div><!-- /header -->
+            <!-- <div data-role="header" class="header" id="main" >
+                <h1>Game</h1>
+            </div> -->
         
             <div role="main" class="ui-content" >
-                <div id="game-form">
-                    <fieldset class="ui-grid-a">
-                        <div class="ui-block-a"><input type="submit" value="X" data-theme="a"></div>
-                        <div class="ui-block-b"><input type="text"  style="padding:10px;" id="p1-name"></div>
-                        <div class="ui-block-a"><input type="submit" value="O" data-theme="a"></div>
-                        <div class="ui-block-b"><input type="text" style="padding:10px;" id="p2-name"></div>
-                    </fieldset>
-        
-                    <button class="ui-btn" id="play">Play</button>
-
+       
+                <div id="game-form" >
+                    <div id="game-title">
+                        <h1 id="title">Tic Tac Toe</h1>
+                    </div>
+                    <div id="form-table" >
+                        <table >
+                            <tr>
+                            <td class="sign"><span class="ex">x</span></td>
+                            <td><input type="text" id="p1-name"></td>
+                        </tr>
+                        <tr>
+                            <td class="sign"><span class="zero">o</span></td>
+                            <td ><input type="text" id="p2-name"></td>
+                        </tr>
+                        </table>
+                        <div class="div-btn">
+                            <button type="button" class="btn" id="play">Play</button>
+                        </div>
+                       
+                    </div>
                 </div>
-                <div id="game-board" class="ui-content">
+
+                <div id="game-board" class="ui-content" >
                    
                     <fieldset class="ui-grid-a" id="board-title">
-                        <div class="ui-block-a">
-                            <span class="icon">X</span><span id="p1"></span>
+                        <div class="ui-block-a" id="p1-link">
+                            <span class="ex">X</span><span id="p1-title" class="titles"></span><span id="p1-score" class="titles">0</span>
                         </div>
-                        <div class="ui-block-b">
-                            <span class="icon">O</span><span id="p2"></span>
+                        <div class="ui-block-b" id="p2-link">
+                            <span class="zero">O</span><span id="p2-title" class="titles"></span><span id="p2-score" class="titles">0</span>
                         </div>
                         
                     </fieldset>
+                   
                   
                    <div id="board-body">
                         <table>
@@ -61,7 +74,19 @@
 
                    </div>
                    <br>
-                   <button type="button" id="reset">Reset</button>
+                   <div class="div-btn">
+                        <button type="button" class="btn" id="reset">Reset</button>
+                   </div>
+                  
+                </div>
+
+                <div id="myModal" class="modal">
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                          <span class="close">&times;</span>
+                          <p></p>
+                        </div>
+                      
                 </div>
                 
 
@@ -69,8 +94,8 @@
 
             </div><!-- /content -->
         
-            <div data-role="footer" data-position="fixed">
-                <h4>&copy;gravityboguz</h4>
+            <div data-role="footer" data-position="fixed" class="footer">
+                <b>&copy;gravitybogus2019</b>
             </div><!-- /footer -->
 
         </div><!-- /page -->
@@ -90,6 +115,13 @@
 		var p1_score = 0;
 		var p2_score = 0;
 
+        //modal close
+        $('.modal .close').click(function() {
+
+            $('.modal').css('display', 'none');
+           
+        });
+
         // reset
         $('#reset').click(function() {
             location.reload();
@@ -103,8 +135,11 @@
             var p1_name = $('#p1-name').val();
 			var p2_name = $('#p2-name').val();
 
-			$('#p1').html(p1_name);
-			$('#p2').html(p2_name);
+            if(p1_name.length > 5) p1_name = p1_name.substring(0,5);
+            if(p2_name.length > 5) p2_name = p2_name.substring(0,5);
+
+			$('#p1-title').html(p1_name);
+			$('#p2-title').html(p2_name);
 
 			$('#game-board').show();
 			$('#game-form').hide();
@@ -119,6 +154,22 @@
 
             start: function(){
 
+                
+                $.nextPlayer();
+
+                    if(turn){
+
+                        $('#p1-link').addClass('active');
+                        $('#p2-link').removeClass('active');
+
+                        }else{
+
+                        $('#p2-link').addClass('active');
+                        $('#p1-link').removeClass('active');
+
+
+                }
+
                 $("#board-body tr td").click(function() {
 
                   
@@ -127,6 +178,19 @@
                         $(this).html($.put(sign))
                     
                         $.nextPlayer();
+
+                        if(turn){
+
+                            $('#p1-link').addClass('active');
+                            $('#p2-link').removeClass('active');
+
+                            }else{
+
+                            $('#p2-link').addClass('active');
+                            $('#p1-link').removeClass('active');
+
+
+                        }
 
                         var counts = 0;
                         var draw = true;
@@ -145,7 +209,10 @@
                         // If Draw
                         if(counts == 9 && draw == true){
 
-                            alert('draw');
+                            $('.modal').css('display', 'block');
+                            $("#myModal p").html('Draw!');
+
+                            $('td').html('');
 
                         }  
                         
@@ -164,7 +231,11 @@
                         // If winner is X player1 
                         if((box1 ===  'x' && box2 === 'x' && box3 === 'x') || (box1 === 'x' && box4 === 'x' && box7 === 'x') || (box1 === 'x' && box5 === 'x' && box9 === 'x') || (box1 === 'x' && box2 === 'x' && box3 === 'x') || (box2 === 'x' && box5 === 'x' && box8 === 'x') || (box4 === 'x' && box5 === 'x' && box6 === 'x') || (box7 === 'x' && box8 === 'x' && box9 === 'x') || (box3 === 'x' && box5 === 'x' && box7 === 'x') || (box3 === 'x' && box6 === 'x' && box9 === 'x')) {
 
-                        alert('X wins')
+                       
+                        p1_score += 1;
+                        $('#p1-score').html(p1_score);	
+                        $('.modal').css('display', 'block');
+                        $("#myModal p").html('Winner '+$('#p1-title').text()+ ': ' +p1_score);
 
                         $('td').html('');
 
@@ -176,7 +247,12 @@
                         // If winner is O player2
                         if((box1 ===  'o' && box2 === 'o' && box3 === 'o') || (box1 === 'o' && box4 === 'o' && box7 === 'o') || (box1 === 'o' && box5 === 'o' && box9 === 'o') || (box1 === 'o' && box2 === 'o' && box3 === 'o') || (box2 === 'o' && box5 === 'o' && box8 === 'o') || (box4 === 'o' && box5 === 'o' && box6 === 'o') || (box7 === 'o' && box8 === 'o' && box9 === 'o') || (box3 === 'o' && box5 === 'o' && box7 === 'o') || (box3 === 'o' && box6 === 'o' && box9 === 'o')) {
 
-                        alert('O wins')
+                      
+                        p2_score += 1;
+                        $('#p2-score').html(p2_score);
+                        $('.modal').css('display', 'block');
+                        $("#myModal p").html('Winner '+$('#p2-title').text()+ ': ' +p2_score);
+                       
 
                         $('td').html('');
 

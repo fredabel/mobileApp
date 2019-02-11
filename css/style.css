@@ -1,69 +1,190 @@
-body{
 
-    background-color: #00CED1; 
+#content{
+    /* background-image: linear-gradient(to bottom, #0d469b, #005d90, #00676f, #426b58, #696d5f); */
+    background-image: url('../img/body.jpg');
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+   
 }
-#main{
-  padding: 10px; 
-  color:white; 
-  background-color:#4169E1;
+#game-title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-#game-form{
-    padding-top:50px;
+#title{
+
+    background-image: linear-gradient(to right top, #f2c487, #e4b372, #d7a25e, #c99149, #bb8035, #bb8137, #ba833a, #ba843c, #c89755, #d5ab6f, #e3be89, #f0d2a4);
+    font-weight: bold;
+    width: 200px;
+    padding: 15px;
+    font-size: 20px; 
+    border-radius: 30px; 
+    color: white;
+    margin-bottom: 30px;
+
+
+}
+/* game-form */
+.sign{
+
+    font-size: 40px; 
+    font-family: inherit;
+    margin-right: 10px;
+}
+
+#form-table{
+   
+    padding: 50px 20px;
+    background-image: linear-gradient(to right top, #64461f, #704d1e, #7c531e, #895a1c, #96611b, #96621c, #95621d, #95631e, #875d22, #7a5725, #6d5127, #604b2a);
+    border-width: 6px;
+    border-style: solid;
+    border-color: orange;
+    border-radius: 20px;
+}
+
+
+/* button */
+.div-btn{
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.div-btn .btn{
+
+    width: 200px;
+    border-radius: 20px;
+    background-color: #228B22;
+    border: none;
+    color: white;
+   
+}
+#reset{
+    background-color: fuchsia; 
+}
+
+
+/* board-game */
+
+#board-body{
+    padding: 10px;
+    border-width: 6px;
+    border-style: solid;
+    border-color: orange;
+    border-radius: 20px; 
+    background-image: linear-gradient(to right top, #096227, #0a6f2b, #0c7c30, #0f8934, #129638, #1e943d, #279342, #2e9146, #378049, #3e704a, #435f4a, #464e48);
+
 }
 #board-title{
     text-align: center;
-    background-color: #6495ED;
+    padding: 10px;
+    font-size: 17px;
     color: white;
-    padding: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    
 }
-.icon{
+.ex{
 
-    margin-right: 10px;
+    color: blue;
+    margin-right: 10px;  
+}
+.zero{
 
+    color: red;
+    margin-right: 10px;  
+}
+
+.titles{
+    margin-right: 20px;  
+   
+}
+
+.active{
+
+    padding: 5px;
+    border-radius: 20px; 
+    background-image: linear-gradient(to right top, #f2c487, #e4b372, #d7a25e, #c99149, #bb8035, #bb8137, #ba833a, #ba843c, #c89755, #d5ab6f, #e3be89, #f0d2a4);
 }
 
 /* table */
-#board-body{
-
-    padding: 10px;
-    border: 2px solid grey;
 
 
-}
-table {
+#board-body table {
     width: 100%;
-	height: 200px;
     border-collapse: collapse;
-    
+      
 }
-td{
-	width: 20%;
-	border: 2px solid grey;
+#game-board  td{
+
+    width: 20%;
+    font-family: 'Courier New', Courier, monospace;
+	border: 2px solid white;
 	text-align: center;
 	vertical-align: center;
     height: 80px;
-    font-size: 16px;
+    font-size: 50px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: white;
 
 }
-td:first-of-type {
+#board-body td:first-of-type {
 	border-left-color: transparent;
 	border-top-color: transparent;
 }
-td:nth-of-type(2) {
+#board-body td:nth-of-type(2) {
 	border-top-color: transparent;
 }
-td:nth-of-type(3) {
+#board-body td:nth-of-type(3) {
 	border-right-color: transparent;
 	border-top-color: transparent;
 }
-tr:nth-of-type(3) td {
+#board-body tr:nth-of-type(3) td {
 	border-bottom-color: transparent;
 }
 
-
-
-#play{
-
-   color:white; 
-   background-color:#bb81ac;
+.footer{
+    padding:10px;
 }
+
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+  .modal-content {
+    background-image: linear-gradient(to right top, #096227, #0a6f2b, #0c7c30, #0f8934, #129638, #1e943d, #279342, #2e9146, #378049, #3e704a, #435f4a, #464e48);
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    color: white;
+}
+  /* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
