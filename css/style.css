@@ -1,78 +1,69 @@
-.head{
+body{
 
-    text-align: left;
-    background-color: #708090;
-    padding: 5px 15px;
+    background-color: #00CED1; 
+}
+#main{
+  padding: 10px; 
+  color:white; 
+  background-color:#4169E1;
+}
+#game-form{
+    padding-top:50px;
+}
+#board-title{
+    text-align: center;
+    background-color: #6495ED;
     color: white;
+    padding: 20px;
+}
+.icon{
+
+    margin-right: 10px;
 
 }
-.toggle-menu{
-    position: absolute;
-    top: 20px;
-    right: 16px;
-}
-.toggle-menu div{
 
-    width: 35px;
-    height: 5px;
-    background-color:white;
-    margin: 6px 0;
-   
-}
+/* table */
+#board-body{
 
-
-.form-title{
-    text-align: center;
-    position: relative;
-    display: block;
-    background: #FF7052;
     padding: 10px;
-    color: #fff;
-    font-size: 15px;
-    margin-bottom: 0;
-  
+    border: 2px solid grey;
+
+
+}
+table {
+    width: 100%;
+	height: 200px;
+    border-collapse: collapse;
     
 }
-.form-body{
-
-   
-    text-align: center;
-    position: absolute;
-    background: #fff;
-    padding: 9px;
-   
-
-}
-
-form{
-    padding: 30px;
-   
-}
-
-/* inputs */
-input{
-   
-    padding: 12px 50px;
-    margin: 8px 0;
-    display: inline-block;
-    box-sizing: border-box;
-    
-}
-
-.button {
-  
-    border: none;
-    padding: 15px 22px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    
-    margin: 4px 2px;
-    cursor: pointer;
-    -webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+td{
+	width: 20%;
+	border: 2px solid grey;
+	text-align: center;
+	vertical-align: center;
+    height: 80px;
+    font-size: 16px;
 
 }
-  
-      
+td:first-of-type {
+	border-left-color: transparent;
+	border-top-color: transparent;
+}
+td:nth-of-type(2) {
+	border-top-color: transparent;
+}
+td:nth-of-type(3) {
+	border-right-color: transparent;
+	border-top-color: transparent;
+}
+tr:nth-of-type(3) td {
+	border-bottom-color: transparent;
+}
+
+
+
+#play{
+
+   color:white; 
+   background-color:#bb81ac;
+}

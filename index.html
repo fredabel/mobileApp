@@ -6,105 +6,223 @@
     <title>Mobile App Training</title>
     <link rel="stylesheet" href="css/jquery.mobile-1.4.5.css">
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/jquery.js"></script>
-    
-    <script src="js/jquery.mobile-1.4.5.js"></script>
+   
     
 </head>
 <body>
+        <div data-role="page">
 
-    <!-- Start of first page -->
-    <div data-role="page" id="login">
-    
-        <div data-role="" class="head">
-            <h2>App</h2>
-            <div class="toggle-menu">
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
-        </div><!-- /header -->
-    
-        <div role="main" class="ui-content">
-            <form action="" class="form_login" >
-                <div class="form-title">
-                    <p>Log in</p>
-                </div> 
-                <div class="form-body">
-                    <input type="text" id="email" placeholder=" Email">
-                    <br>
-                    
-                    <input type="password" id="password" placeholder=" Password">
-                    <br>
-                    
-                    <button type="submit" class="button">Submit</button>
+            <div data-role="header" class="header" id="main" >
+                <h1>Tic Tac Toe</h1>
+            </div><!-- /header -->
+        
+            <div role="main" class="ui-content" >
+                <div id="game-form">
+                    <fieldset class="ui-grid-a">
+                        <div class="ui-block-a"><input type="submit" value="X" data-theme="a"></div>
+                        <div class="ui-block-b"><input type="text"  style="padding:10px;" id="p1-name"></div>
+                        <div class="ui-block-a"><input type="submit" value="O" data-theme="a"></div>
+                        <div class="ui-block-b"><input type="text" style="padding:10px;" id="p2-name"></div>
+                    </fieldset>
+        
+                    <button class="ui-btn" id="play">Play</button>
+
+                </div>
+                <div id="game-board" class="ui-content">
+                   
+                    <fieldset class="ui-grid-a" id="board-title">
+                        <div class="ui-block-a">
+                            <span class="icon">X</span><span id="p1"></span>
+                        </div>
+                        <div class="ui-block-b">
+                            <span class="icon">O</span><span id="p2"></span>
+                        </div>
+                        
+                    </fieldset>
+                  
+                   <div id="board-body">
+                        <table>
+                            <tr>
+                                <td id="box1"></td>
+                                <td id="box2"></td>
+                                <td id="box3"></td>
+                            </tr>
+                            <tr>
+                                <td id="box4"></td>
+                                <td id="box5"></td>
+                                <td id="box6"></td>
+                            </tr>
+                            <tr>
+                                <td id="box7"></td>
+                                <td id="box8"></td>
+                                <td id="box9"></td>
+                            </tr>
+                        </table>
+
+                   </div>
+                   <br>
+                   <button type="button" id="reset">Reset</button>
                 </div>
                 
-            </form>
-           
-        </div><!-- /content -->
+
+
+
+            </div><!-- /content -->
         
-       
-        <div data-role="footer" data-position="fixed">
-            <h4>Footer</h4>
-        </div><!-- /footer -->
-    </div><!-- /page -->
+            <div data-role="footer" data-position="fixed">
+                <h4>&copy;gravityboguz</h4>
+            </div><!-- /footer -->
 
-
-
-    <div data-role="page" id="foo">
+        </div><!-- /page -->
     
-        <div data-role="header" >
-            <h1>Gravitybogus</h1>
-        </div><!-- /header -->
-    
-        <div role="main" class="ui-content">
-            <a href="#home" class="ui-btn">Home</a>
-            <a href="#bar" class="ui-btn">Blog</a>
-            <a href="#bar" class="ui-btn">Settings</a>
-        </div><!-- /content -->
-        
-        <img src="https://drive.google.com/uc?id=14Pt33MuO4w0A2NZ9quCFMfh8ioBSWvjP" height="300" width="300" alt="">
-        <div data-role="footer" data-position="fixed">
-            <h4>Footer</h4>
-        </div><!-- /footer -->
-    </div><!-- /page -->
-    
-
-
-
-    <!-- Start of second page -->
-    <div data-role="page" id="home">
-    
-        <div data-role="header">
-            <h1>Home</h1>
-        </div><!-- /header -->
-        <div role="main" class="ui-content">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, ipsam accusantium porro quibusdam nesciunt obcaecati magni nobis cumque! Debitis recusandae voluptatum sunt quae? Vel facere quas obcaecati, quam dignissimos neque!</p>
-            <br><br>
-            <p id="sample"></p>
-
-            <a href="#foo" class="ui-btn">Back to menu</a>
-        </div><!-- /content -->
-    
-
-
-
-
-        <div data-role="footer" data-position="fixed">
-            <h4>Footer</h4>
-        </div><!-- /footer -->
-    </div><!-- /page -->
-    </body>
+</body>
 </html>
+<script src="js/jquery.js"></script>
+<script src="js/jquery.mobile-1.4.5.js"></script>
+
 <script type="text/javascript">
     $(document).ready(function(){
 
-        $.post('/php_training/hello.php',{},function(data){
-            console.log(data)
-            $('#sample').html(data);
+        var turn;
+		var sign;
+		var winner;
+
+		var p1_score = 0;
+		var p2_score = 0;
+
+        // reset
+        $('#reset').click(function() {
+            location.reload();
+        });
+
+        $('#game-board').hide();
+
+        
+		$('#play').click(function(){
+
+            var p1_name = $('#p1-name').val();
+			var p2_name = $('#p2-name').val();
+
+			$('#p1').html(p1_name);
+			$('#p2').html(p2_name);
+
+			$('#game-board').show();
+			$('#game-form').hide();
+
+
+           
+            
 
         });
+
+        $.extend({
+
+            start: function(){
+
+                $("#board-body tr td").click(function() {
+
+                  
+                    if($(this).text() == 0){
+                        
+                        $(this).html($.put(sign))
+                    
+                        $.nextPlayer();
+
+                        var counts = 0;
+                        var draw = true;
+
+                        for(var i = 1; i <= 9; i++ ){
+
+                            // console.log($('#box'+i))
+                            if($('#box'+i).text().length > 0){
+
+                                counts += $('#box'+i).text().length;
+
+                            }	
+                            
+                        }
+
+                        // If Draw
+                        if(counts == 9 && draw == true){
+
+                            alert('draw');
+
+                        }  
+                        
+				      	var box1, box2, box3, box4, box5, box6, box7, box8, box9;
+                        box1 = $('#box1').text();
+				      	box2 = $('#box2').text();
+				      	box3 = $('#box3').text();
+				      	box4 = $('#box4').text();
+				      	box5 = $('#box5').text();
+				      	box6 = $('#box6').text();
+				      	box7 = $('#box7').text();
+				      	box8 = $('#box8').text();
+				      	box9 = $('#box9').text();
+
+
+                        // If winner is X player1 
+                        if((box1 ===  'x' && box2 === 'x' && box3 === 'x') || (box1 === 'x' && box4 === 'x' && box7 === 'x') || (box1 === 'x' && box5 === 'x' && box9 === 'x') || (box1 === 'x' && box2 === 'x' && box3 === 'x') || (box2 === 'x' && box5 === 'x' && box8 === 'x') || (box4 === 'x' && box5 === 'x' && box6 === 'x') || (box7 === 'x' && box8 === 'x' && box9 === 'x') || (box3 === 'x' && box5 === 'x' && box7 === 'x') || (box3 === 'x' && box6 === 'x' && box9 === 'x')) {
+
+                        alert('X wins')
+
+                        $('td').html('');
+
+                        draw = false;
+
+                        }
+                        
+
+                        // If winner is O player2
+                        if((box1 ===  'o' && box2 === 'o' && box3 === 'o') || (box1 === 'o' && box4 === 'o' && box7 === 'o') || (box1 === 'o' && box5 === 'o' && box9 === 'o') || (box1 === 'o' && box2 === 'o' && box3 === 'o') || (box2 === 'o' && box5 === 'o' && box8 === 'o') || (box4 === 'o' && box5 === 'o' && box6 === 'o') || (box7 === 'o' && box8 === 'o' && box9 === 'o') || (box3 === 'o' && box5 === 'o' && box7 === 'o') || (box3 === 'o' && box6 === 'o' && box9 === 'o')) {
+
+                        alert('O wins')
+
+                        $('td').html('');
+
+                        draw = false;
+
+                        }
+
+                    }else{
+                        alert('this is taken')
+                    }
+
+                });
+            },
+            nextPlayer: function(){
+				
+                if(turn){
+
+                  turn = false;
+
+                }else{
+
+                  turn = true;
+                }
+
+                return turn;
+            },
+
+            put: function(sign){
+
+                if(turn){
+
+                var x = 'x';
+
+                return x;
+
+                }else{
+
+                var o = 'o';
+
+                return o;
+                }
+            }
+
+        });
+
+        $.start();
 
     });
 </script>
