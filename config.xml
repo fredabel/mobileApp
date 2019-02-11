@@ -5,7 +5,7 @@
     versionCode = "10"
     version     = "0.0.2" >
 
-  <name>Mobile App Training</name>
+  <name>Tic Tac Toe</name>
 
   <description>
       An example for phonegap build docs.

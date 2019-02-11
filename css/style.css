@@ -3,9 +3,9 @@
     /* background-image: linear-gradient(to bottom, #0d469b, #005d90, #00676f, #426b58, #696d5f); */
     background-image: url('../img/body.jpg');
     text-align: center;
-    display: flex;
+    /* display: flex;
     align-items: center;
-    justify-content: center; 
+    justify-content: center;  */
    
 }
 #game-title{
